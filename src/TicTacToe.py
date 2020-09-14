@@ -64,8 +64,12 @@ while True:
     Tic = [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
     CurPla = 0
     pla = [2,2]
+    players = [0,0]
     player_input()
+    #print("Marker of Player 1 : " + pla[0] + "\nMarker of Player 2 : " + pla[1] + "\n")
     print(f"Marker of Player 1 : {pla[0]}\nMarker of Player 2 : {pla[1]}\n")
+    players[0] = input("Enter Name for player 1 : ")
+    players[1] = input("Enter Name for player 2 : ")
     display_board(Tic)
     game_on = True
     while game_on:
@@ -73,17 +77,20 @@ while True:
             print("Sadly its a draw")
             break
         #Player 1 Turn
-        print(f"Player {CurPla+1}'s chance, your marker is {pla[CurPla]}")
+        #print(players[CurPla]+"'s chance, your marker is "+ pla[CurPla])
+        print(f"{players[CurPla]}'s chance, your marker is {pla[CurPla]}")
         pos = 0
         while pos==0:
             pos = player_choice(Tic)
-            print("Already occupied ,chose some other position")
+            if not pos:
+	            print("Already occupied ,choose some other position!")
         
         place_marker(Tic,pla[CurPla],pos)
         display_board(Tic)
         if win_check(Tic, pla[CurPla]):
             game_on = False
-            print(f"Congrats!!!, Player {CurPla+1} has won!")
+            #print("Congrats!!!, " + players[CurPla] + " has won!")	
+            print(f"Congrats!!!,{players[CurPla]} has won!")
         CurPla = not CurPla
     if not replay():
         break
